@@ -62,6 +62,13 @@ diff:
       kind: ServiceAccount
       operations:
         - { "op": "remove", "path": "/imagePullSecrets" }
+    - apiVersion: monitoring.coreos.com/v1
+      kind: ServiceMonitor
+      operations:
+        - { "op": "remove", "path": "/spec/endpoints/0/metricRelabelings" }
+        - { "op": "remove", "path": "/spec/endpoints/0/relabelings" }
+        - { "op": "remove", "path": "/spec/endpoints/1/metricRelabelings" }
+        - { "op": "remove", "path": "/spec/endpoints/1/relabelings" }
 dependsOn:
   # Format:
   #     <GITREPO-NAME>-<BUNDLE_PATH> with all path separators replaced by "-"
