@@ -3,7 +3,7 @@
 # The namespace this chart will be installed and restricted to,
 # if not specified the chart will be installed to "default"
 namespace: fleet-helm-simplefour
-labels: 
+labels:
   apps: simplefour
 
 # Custom helm options
@@ -32,8 +32,6 @@ helm:
   # Custom values that will be passed as values.yaml to the installation
   values:
     replicas: 1
-dependsOn:
-  - name: rabbitmq-cert
   # Format:
   #     <GITREPO-NAME>-<BUNDLE_PATH> with all path separators replaced by "-"
   #
@@ -51,5 +49,3 @@ dependsOn:
   #     opni-fleet-examples-fleets-opni-ui-plugin-opera-021f7
 
   # Select bundles to depend on based on their label.
- 
-     
