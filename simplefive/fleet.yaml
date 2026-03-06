@@ -3,7 +3,7 @@
 # The namespace this chart will be installed and restricted to,
 # if not specified the chart will be installed to "default"
 namespace: fleet-helm-simplefive
-labels: 
+labels:
   apps: simplefive
 
 # Custom helm options
@@ -33,7 +33,6 @@ helm:
   values:
     replicas: 1
 dependsOn:
-
   # Format:
   #     <GITREPO-NAME>-<BUNDLE_PATH> with all path separators replaced by "-"
   #
@@ -53,4 +52,4 @@ dependsOn:
   # Select bundles to depend on based on their label.
   - selector:
       matchLabels:
-        apps: simplefour
+        apps: simplethree
