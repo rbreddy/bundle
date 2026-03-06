@@ -5,9 +5,8 @@ helm:
   releaseName: rancher-monitoring
   repo: https://charts.rancher.io
   chart: rancher-monitoring
-  version: 106.1.2+up69.8.2-rancher.7
+  version: 109.0.0-rc.2+up80.9.1-rancher.4
   values:
-    
     prometheusOperator:
       prometheusSpec:
         resources:
@@ -15,53 +14,55 @@ helm:
             cpu: 10m
 diff:
   comparePatches:
-  - apiVersion: admissionregistration.k8s.io/v1beta1
-    kind: MutatingWebhookConfiguration
-    name: rancher-monitoring-admission
-    operations:
-    - {"op":"remove", "path":"/webhooks"}
-  - apiVersion: admissionregistration.k8s.io/v1beta1
-    kind: ValidatingWebhookConfiguration
-    name: rancher-monitoring-admission
-    jsonPointers:
-    - "/webhooks"
-  - apiVersion: admissionregistration.k8s.io/v1
-    kind: MutatingWebhookConfiguration
-    name: rancher-monitoring-admission
-    operations:
-    - {"op":"remove", "path":"/webhooks"}
-  - apiVersion: admissionregistration.k8s.io/v1
-    kind: ValidatingWebhookConfiguration
-    name: rancher-monitoring-admission
-    jsonPointers:
-    - "/webhooks"    
-  - apiVersion: policy/v1beta1
-    kind: PodSecurityPolicy
-    operations:
-    - {"op":"remove", "path":"/spec/hostIPC"}
-    - {"op":"remove", "path":"/spec/hostNetwork"}
-    - {"op":"remove", "path":"/spec/hostPID"}
-    - {"op":"remove", "path":"/spec/privileged"}
-    - {"op":"remove", "path":"/spec/readOnlyRootFilesystem"}
-  - apiVersion: apps/v1
-    kind: Deployment
-    name: rancher-monitoring-grafana
-    namespace: cattle-monitoring-system
-    operations:
-    - {"op":"remove", "path":"/spec/template/spec/containers/0/env/0/value"}
-  - apiVersion: apps/v1
-    kind: Deployment
-    operations:
-    - {"op":"remove", "path":"/spec/template/spec/hostNetwork"}
-    - {"op":"remove", "path":"/spec/template/spec/nodeSelector"}
-    - {"op":"remove", "path":"/spec/template/spec/priorityClassName"}
-    - {"op":"remove", "path":"/spec/template/spec/tolerations"}
-  - apiVersion: v1
-    kind: ServiceAccount
-    operations:
-    - {"op":"remove", "path":"/imagePullSecrets"}
+    - apiVersion: admissionregistration.k8s.io/v1beta1
+      kind: MutatingWebhookConfiguration
+      name: rancher-monitoring-admission
+      operations:
+        - { "op": "remove", "path": "/webhooks" }
+    - apiVersion: admissionregistration.k8s.io/v1beta1
+      kind: ValidatingWebhookConfiguration
+      name: rancher-monitoring-admission
+      jsonPointers:
+        - "/webhooks"
+    - apiVersion: admissionregistration.k8s.io/v1
+      kind: MutatingWebhookConfiguration
+      name: rancher-monitoring-admission
+      operations:
+        - { "op": "remove", "path": "/webhooks" }
+    - apiVersion: admissionregistration.k8s.io/v1
+      kind: ValidatingWebhookConfiguration
+      name: rancher-monitoring-admission
+      jsonPointers:
+        - "/webhooks"
+    - apiVersion: policy/v1beta1
+      kind: PodSecurityPolicy
+      operations:
+        - { "op": "remove", "path": "/spec/hostIPC" }
+        - { "op": "remove", "path": "/spec/hostNetwork" }
+        - { "op": "remove", "path": "/spec/hostPID" }
+        - { "op": "remove", "path": "/spec/privileged" }
+        - { "op": "remove", "path": "/spec/readOnlyRootFilesystem" }
+    - apiVersion: apps/v1
+      kind: Deployment
+      name: rancher-monitoring-grafana
+      namespace: cattle-monitoring-system
+      operations:
+        - {
+            "op": "remove",
+            "path": "/spec/template/spec/containers/0/env/0/value",
+          }
+    - apiVersion: apps/v1
+      kind: Deployment
+      operations:
+        - { "op": "remove", "path": "/spec/template/spec/hostNetwork" }
+        - { "op": "remove", "path": "/spec/template/spec/nodeSelector" }
+        - { "op": "remove", "path": "/spec/template/spec/priorityClassName" }
+        - { "op": "remove", "path": "/spec/template/spec/tolerations" }
+    - apiVersion: v1
+      kind: ServiceAccount
+      operations:
+        - { "op": "remove", "path": "/imagePullSecrets" }
 dependsOn:
-
   # Format:
   #     <GITREPO-NAME>-<BUNDLE_PATH> with all path separators replaced by "-"
   #
