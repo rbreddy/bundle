@@ -5,4 +5,4 @@ labels:
 dependsOn:
   - selector:
       matchLabels:
-        apps: dp001
+        apps: dp01
